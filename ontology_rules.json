@@ -1,0 +1,126 @@
+{
+  "ontology": {
+    "name": "Онтология академической среды",
+    "classes": [
+      "Учёный",
+      "Публикация",
+      "Журнал",
+      "Специальность",
+      "Диссовет"
+    ],
+    "relations": [
+      "фио",
+      "название",
+      "шифр",
+      "код",
+      "опубликовал_статью",
+      "опубликована_в",
+      "покрывает_специальность",
+      "включает_специальность",
+      "состоит_в_совете",
+      "представляет_специальность"
+    ]
+  },
+  "rules": {
+    "structured": [
+      {
+        "source": "Scientist",
+        "subject_field": "id",
+        "relation": "фио",
+        "object_field": "name",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Publication",
+        "subject_field": "id",
+        "relation": "название",
+        "object_field": "title",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Publication",
+        "subject_field": "scientist",
+        "relation": "опубликовал_статью",
+        "object_field": "id",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Publication",
+        "subject_field": "id",
+        "relation": "опубликована_в",
+        "object_field": "journal",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Journal",
+        "subject_field": "id",
+        "relation": "название",
+        "object_field": "title",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "JournalSpecialization",
+        "subject_field": "journal",
+        "relation": "покрывает_специальность",
+        "object_field": "specialization",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Commission",
+        "subject_field": "id",
+        "relation": "название",
+        "object_field": "name",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Commission",
+        "subject_field": "id",
+        "relation": "шифр",
+        "object_field": "code",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "Specialization",
+        "subject_field": "id",
+        "relation": "код",
+        "object_field": "code",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "SpecializationInCommission",
+        "subject_field": "commission",
+        "relation": "включает_специальность",
+        "object_field": "specialization",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "ScientistInCommission",
+        "subject_field": "scientist",
+        "relation": "состоит_в_совете",
+        "object_field": "commission",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      },
+      {
+        "source": "ScientistInCommission",
+        "subject_field": "scientist",
+        "relation": "представляет_специальность",
+        "object_field": "specialization",
+        "time_default": "2025-01-01",
+        "confidence": 1.0
+      }
+    ],
+    "semi_structured": [],
+    "unstructured": []
+  }
+}
