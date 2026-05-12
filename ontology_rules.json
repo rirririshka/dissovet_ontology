@@ -21,101 +21,199 @@
       "представляет_специальность"
     ]
   },
+  "entity_resolution": {
+    "mappings": [
+      {
+        "source_field": "Scientist.id",
+        "target_entity": "Учёный",
+        "is_primary_key": true
+      },
+      {
+        "source_field": "Publication.scientist",
+        "target_entity": "Учёный",
+        "references": "Scientist.id"
+      },
+      {
+        "source_field": "Publication.id",
+        "target_entity": "Публикация",
+        "is_primary_key": true
+      },
+      {
+        "source_field": "Publication.journal",
+        "target_entity": "Журнал",
+        "references": "Journal.id"
+      },
+      {
+        "source_field": "Journal.id",
+        "target_entity": "Журнал",
+        "is_primary_key": true
+      },
+      {
+        "source_field": "JournalSpecialization.journal",
+        "target_entity": "Журнал",
+        "references": "Journal.id"
+      },
+      {
+        "source_field": "JournalSpecialization.specialization",
+        "target_entity": "Специальность",
+        "references": "Specialization.id"
+      },
+      {
+        "source_field": "Specialization.id",
+        "target_entity": "Специальность",
+        "is_primary_key": true
+      },
+      {
+        "source_field": "Commission.id",
+        "target_entity": "Диссовет",
+        "is_primary_key": true
+      },
+      {
+        "source_field": "SpecializationInCommission.commission",
+        "target_entity": "Диссовет",
+        "references": "Commission.id"
+      },
+      {
+        "source_field": "SpecializationInCommission.specialization",
+        "target_entity": "Специальность",
+        "references": "Specialization.id"
+      },
+      {
+        "source_field": "ScientistInCommission.scientist",
+        "target_entity": "Учёный",
+        "references": "Scientist.id"
+      },
+      {
+        "source_field": "ScientistInCommission.commission",
+        "target_entity": "Диссовет",
+        "references": "Commission.id"
+      },
+      {
+        "source_field": "ScientistInCommission.specialization",
+        "target_entity": "Специальность",
+        "references": "Specialization.id"
+      }
+    ]
+  },
   "rules": {
     "structured": [
       {
         "source": "Scientist",
         "subject_field": "id",
+        "subject_entity": "Учёный",
         "relation": "фио",
         "object_field": "name",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Publication",
         "subject_field": "id",
+        "subject_entity": "Публикация",
         "relation": "название",
         "object_field": "title",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Publication",
         "subject_field": "scientist",
+        "subject_entity": "Учёный",
         "relation": "опубликовал_статью",
         "object_field": "id",
+        "object_entity": "Публикация",
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Publication",
         "subject_field": "id",
+        "subject_entity": "Публикация",
         "relation": "опубликована_в",
         "object_field": "journal",
+        "object_entity": "Журнал",
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Journal",
         "subject_field": "id",
+        "subject_entity": "Журнал",
         "relation": "название",
         "object_field": "title",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "JournalSpecialization",
         "subject_field": "journal",
+        "subject_entity": "Журнал",
         "relation": "покрывает_специальность",
         "object_field": "specialization",
+        "object_entity": "Специальность",
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Commission",
         "subject_field": "id",
+        "subject_entity": "Диссовет",
         "relation": "название",
         "object_field": "name",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Commission",
         "subject_field": "id",
+        "subject_entity": "Диссовет",
         "relation": "шифр",
         "object_field": "code",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "Specialization",
         "subject_field": "id",
+        "subject_entity": "Специальность",
         "relation": "код",
         "object_field": "code",
+        "object_entity": null,
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "SpecializationInCommission",
         "subject_field": "commission",
+        "subject_entity": "Диссовет",
         "relation": "включает_специальность",
         "object_field": "specialization",
+        "object_entity": "Специальность",
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "ScientistInCommission",
         "subject_field": "scientist",
+        "subject_entity": "Учёный",
         "relation": "состоит_в_совете",
         "object_field": "commission",
+        "object_entity": "Диссовет",
         "time_default": "2025-01-01",
         "confidence": 1.0
       },
       {
         "source": "ScientistInCommission",
         "subject_field": "scientist",
+        "subject_entity": "Учёный",
         "relation": "представляет_специальность",
         "object_field": "specialization",
+        "object_entity": "Специальность",
         "time_default": "2025-01-01",
         "confidence": 1.0
       }
